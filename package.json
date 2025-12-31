@@ -1,0 +1,24 @@
+{
+  "name": "wat4scene",
+  "version": "1.0.0",
+  "description": "my ultimate scene operator based on webassembly",
+  "homepage": "https://github.com/tokbuga/wat4scene#readme",
+  "bugs": {
+    "url": "https://github.com/tokbuga/wat4scene/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tokbuga/wat4scene.git"
+  },
+  "license": "MIT",
+  "author": "Özgür Fırat Özpolat",
+  "type": "module",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "sh build"
+  }
+}
