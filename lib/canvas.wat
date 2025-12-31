@@ -1,5 +1,5 @@
 (module
-    (memory 1 1 shared)
+    (imports "self" "memory" (memory $shared 1 1 shared))
 
     (include "window.wat")
     (include "self/CSS.wat")
