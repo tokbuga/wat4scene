@@ -12,19 +12,19 @@
     (include "self/EventTarget.wat")
     (include "self/MouseEvent.wat")
 
-    (global $canvas* mut i32)
-    (global $canvas mut ext)
-    (global $canvas.style mut ext)
+    (global $ptr*           mut i32)
+    (global $canvas         mut ext)
+    (global $canvas.style   mut ext)
 
-    (func $i32.load.innerWidth   (result i32) (i32.load offset=12 (gget $canvas*)))
-    (func $i32.load.innerHeight  (result i32) (i32.load offset=16 (gget $canvas*)))
-    (func $i32.load.clientX      (result f32) (f32.load offset=20 (gget $canvas*)))
-    (func $i32.load.clientY      (result f32) (f32.load offset=24 (gget $canvas*)))
+    (func $i32.load.innerWidth   (result i32) (i32.load offset=12 (gget $ptr*)))
+    (func $i32.load.innerHeight  (result i32) (i32.load offset=16 (gget $ptr*)))
+    (func $i32.load.clientX      (result f32) (f32.load offset=20 (gget $ptr*)))
+    (func $i32.load.clientY      (result f32) (f32.load offset=24 (gget $ptr*)))
 
-    (func $i32.store.innerWidth  (param i32) (i32.store offset=12 (gget $canvas*) (local.get 0)))
-    (func $i32.store.innerHeight (param i32) (i32.store offset=16 (gget $canvas*) (local.get 0)))
-    (func $f32.store.clientX     (param f32) (f32.store offset=20 (gget $canvas*) (local.get 0)))
-    (func $f32.store.clientY     (param f32) (f32.store offset=24 (gget $canvas*) (local.get 0)))
+    (func $i32.store.innerWidth  (param i32) (i32.store offset=12 (gget $ptr*) (local.get 0)))
+    (func $i32.store.innerHeight (param i32) (i32.store offset=16 (gget $ptr*) (local.get 0)))
+    (func $f32.store.clientX     (param f32) (f32.store offset=20 (gget $ptr*) (local.get 0)))
+    (func $f32.store.clientY     (param f32) (f32.store offset=24 (gget $ptr*) (local.get 0)))
 
     (main $init
         (call $init_document)
@@ -52,17 +52,17 @@
 
     (func $init_document
         (call $CSSStyleDeclaration:margin<ext.i32>
-            (call $HTMLElement:style<ext>ext (ref.extern $self.document.body))
+            (call $HTMLElement:style<ext>ext (ref.extern $document.body))
             (false)
         )
 
         (call $Element:removeAttribute<ext.ext>
-            (ref.extern $self.document.body)
+            (ref.extern $document.body)
             (text "onload")
         )
 
         (call $Element:remove<ext>
-            (ref.extern $self.document.head)
+            (ref.extern $document.head)
         )
     )
 
@@ -70,7 +70,7 @@
         (if (gget $canvas != null)
             (then
                 (call $Node:removeChild<ext.ext>
-                    (ref.extern $self.document.body)
+                    (ref.extern $document.body)
                     (gget $canvas)
                 )
             )
@@ -80,7 +80,7 @@
         (gset $canvas.style (call $HTMLElement:style<ext>ext (gget $canvas)))
 
         (call $Element:append<ext.ext> 
-            (ref.extern $self.document.body) 
+            (ref.extern $document.body) 
             (gget $canvas)
         )
 

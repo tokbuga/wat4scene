@@ -1,9 +1,10 @@
 
     (func $HTMLElement:style<ext>ext
-        (param $element <HTMLElement>)
-        (result <CSSStyleDeclaration>)
+        (param $element         <HTMLElement>)
+        (result         <CSSStyleDeclaration>)
+
         (reflect $apply<ext.ext.ext>ext 
-            (ref.extern $self.HTMLElement:style[get]) 
+            (ref.extern $HTMLElement:style[get]) 
             (this) 
             (array)
         )

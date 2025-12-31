@@ -3,8 +3,9 @@
         (param $style   <CSSStyleDeclaration>)
         (param $property             <String>)
         (param $definition          externref)
+
         (reflect $apply<ext.ext.ext>
-            (ref.extern $self.CSSStyleDeclaration:setProperty) 
+            (ref.extern $CSSStyleDeclaration:setProperty) 
             (this)
             (array $of<ext.ext>ext
                 (lget $property) 
@@ -16,6 +17,7 @@
     (func $CSSStyleDeclaration:width<ext.i32>
         (param $style   <CSSStyleDeclaration>)
         (param $value                     i32)
+
         (call $CSSStyleDeclaration:setProperty<ext.ext.ext>
             (this)
             (text "width") 
@@ -26,6 +28,7 @@
     (func $CSSStyleDeclaration:height<ext.i32>
         (param $style   <CSSStyleDeclaration>)
         (param $value                     i32)
+
         (call $CSSStyleDeclaration:setProperty<ext.ext.ext>
             (this)
             (text "height") 
@@ -36,6 +39,7 @@
     (func $CSSStyleDeclaration:margin<ext.i32>
         (param $style   <CSSStyleDeclaration>)
         (param $value                     i32)
+
         (call $CSSStyleDeclaration:setProperty<ext.ext.ext>
             (this)
             (text "margin") 
@@ -46,6 +50,7 @@
     (func $CSSStyleDeclaration:position<ext.ext>
         (param $style   <CSSStyleDeclaration>)
         (param $value                <String>)
+
         (call $CSSStyleDeclaration:setProperty<ext.ext.ext>
             (this)
             (text "position") 
@@ -57,8 +62,9 @@
         (param $style   <CSSStyleDeclaration>)
         (param $property             <String>)
         (result                     externref)
+        
         (reflect $apply<ext.ext.ext>ext
-            (ref.extern $self.CSSStyleDeclaration:getPropertyValue) 
+            (ref.extern $CSSStyleDeclaration:getPropertyValue) 
             (this)
             (array $of<ext>ext (lget $property))
         )
