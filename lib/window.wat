@@ -1,12 +1,12 @@
 
     (func $window.innerWidth<>i32
         (result i32)
-        (apply.i32 (self $innerWidth[get]) (self) (array))
+        (reflect $apply<ext.ext.ext>i32 (ref.extern $self.innerWidth[get]) (self) (array))
     )
 
     (func $window.innerHeight<>i32
         (result i32)
-        (apply.i32 (self $innerHeight[get]) (self) (array))
+        (reflect $apply<ext.ext.ext>i32 (ref.extern $self.innerHeight[get]) (self) (array))
     )
 
     (global $window.onresize mut fun)

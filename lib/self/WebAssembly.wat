@@ -4,9 +4,9 @@
         (param $imports     <Object>)
         (result            <Promise>)
 
-        (apply.ext
-            (self $WebAssembly.instantiate)
-            (self $WebAssembly)
+        (reflect $apply<ext.ext.ext>ext
+            (ref.extern $self.WebAssembly.instantiate)
+            (ref.extern $self.WebAssembly)
             (array $of<ext.ext>ext 
                 (lget $source)
                 (lget $imports)
@@ -33,7 +33,7 @@
         (result     <WebAssembly.Memory>)
 
         (reflect $construct<ext.ext>ext
-            (self $WebAssembly.Memory)
+            (ref.extern $self.WebAssembly.Memory)
             (array $of<ext>ext (this))
         )
     )

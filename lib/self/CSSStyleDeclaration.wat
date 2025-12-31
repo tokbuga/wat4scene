@@ -3,8 +3,8 @@
         (param $style   <CSSStyleDeclaration>)
         (param $property             <String>)
         (param $definition          externref)
-        (apply
-            (self $CSSStyleDeclaration:setProperty) 
+        (reflect $apply<ext.ext.ext>
+            (ref.extern $self.CSSStyleDeclaration:setProperty) 
             (this)
             (array $of<ext.ext>ext
                 (lget $property) 
@@ -57,8 +57,8 @@
         (param $style   <CSSStyleDeclaration>)
         (param $property             <String>)
         (result                     externref)
-        (apply.ext
-            (self $CSSStyleDeclaration:getPropertyValue) 
+        (reflect $apply<ext.ext.ext>ext
+            (ref.extern $self.CSSStyleDeclaration:getPropertyValue) 
             (this)
             (array $of<ext>ext (lget $property))
         )

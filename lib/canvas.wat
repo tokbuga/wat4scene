@@ -1,5 +1,5 @@
 (module
-    (imports "self" "memory" (memory $shared 1 1 shared))
+    (memory 1 1 shared)
 
     (include "window.wat")
     (include "self/CSS.wat")
@@ -52,17 +52,17 @@
 
     (func $init_document
         (call $CSSStyleDeclaration:margin<ext.i32>
-            (call $HTMLElement:style<ext>ext (self $document.body))
+            (call $HTMLElement:style<ext>ext (ref.extern $self.document.body))
             (false)
         )
 
         (call $Element:removeAttribute<ext.ext>
-            (self $document.body)
+            (ref.extern $self.document.body)
             (text "onload")
         )
 
         (call $Element:remove<ext>
-            (self $document.head)
+            (ref.extern $self.document.head)
         )
     )
 
@@ -70,7 +70,7 @@
         (if (gget $canvas != null)
             (then
                 (call $Node:removeChild<ext.ext>
-                    (self $document.body)
+                    (ref.extern $self.document.body)
                     (gget $canvas)
                 )
             )
@@ -80,7 +80,7 @@
         (gset $canvas.style (call $HTMLElement:style<ext>ext (gget $canvas)))
 
         (call $Element:append<ext.ext> 
-            (self $document.body) 
+            (ref.extern $self.document.body) 
             (gget $canvas)
         )
 

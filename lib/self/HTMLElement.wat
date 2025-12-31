@@ -2,8 +2,8 @@
     (func $HTMLElement:style<ext>ext
         (param $element <HTMLElement>)
         (result <CSSStyleDeclaration>)
-        (apply.ext 
-            (self $HTMLElement:style[get]) 
+        (reflect $apply<ext.ext.ext>ext 
+            (ref.extern $self.HTMLElement:style[get]) 
             (this) 
             (array)
         )

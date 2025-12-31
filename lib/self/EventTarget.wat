@@ -4,8 +4,8 @@
         (param $type        <String>)
         (param $handler      funcref)
 
-        (apply
-            (self $EventTarget:addEventListener)
+        (reflect $apply<ext.ext.ext>
+            (ref.extern $self.EventTarget:addEventListener)
             (this)
             (array $of<ext.fun>ext 
                 (lget $type)
@@ -19,8 +19,8 @@
         (param $type        <String>)
         (param $handler      funcref)
 
-        (apply
-            (self $EventTarget:removeEventListener)
+        (reflect $apply<ext.ext.ext>
+            (ref.extern $self.EventTarget:removeEventListener)
             (this)
             (array $of<ext.fun>ext 
                 (lget $type)
