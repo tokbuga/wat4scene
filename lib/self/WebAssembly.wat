@@ -4,7 +4,7 @@
         (param $imports     <Object>)
         (result            <Promise>)
 
-        (ref.apply <ext.ext.ext>ext
+        (func.apply <ext.ext.ext>ext
             (ref.extern $self.WebAssembly.instantiate)
             (ref.extern $self.WebAssembly)
             (array $of<ext.ext>ext 
