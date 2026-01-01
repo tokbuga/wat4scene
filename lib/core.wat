@@ -11,7 +11,7 @@
 
         (lset $descriptor
             (call $WebAssembly.MemoryDescriptor<i32.i32.i32>ext
-                i32(1) i32(1) (true)
+                i32(100) i32(100) (true)
             )
         )
 

@@ -20,3 +20,25 @@
             (self)
         )
     )
+
+    (func $MouseEvent:clientX<ext>i32
+        (param $event <MouseEvent>)
+        (result                i32)
+
+        (reflect $apply<ext.ext.ext>i32 
+            (ref.extern $MouseEvent:clientX[get]) 
+            (this) 
+            (self)
+        )
+    )
+
+    (func $MouseEvent:clientY<ext>i32
+        (param $event <MouseEvent>)
+        (result                i32)
+        
+        (reflect $apply<ext.ext.ext>i32 
+            (ref.extern $MouseEvent:clientY[get]) 
+            (this) 
+            (self)
+        )
+    )
