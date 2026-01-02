@@ -1,5 +1,5 @@
 (module
-    (import "self" "memory" (memory $shared 100 100 shared))
+    (import "self" "memory" (include "memory/definition.wat"))
     (import "memory" "buffer" (global $buffer externref))
 
     (include "window.wat")

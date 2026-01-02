@@ -4,7 +4,19 @@
         (param $object     <Object>)
         (result            <Object>)
 
-        (reflect $apply<ext.ext.ext>ext
+        (call $Object.assign<ext.ext>
+            (lget $target) 
+            (lget $object) 
+        )
+
+        (lget $target) 
+    )
+
+    (func $Object.assign<ext.ext>
+        (param $target     <Object>)
+        (param $object     <Object>)
+
+        (reflect $apply<ext.ext.ext>
             (ref.extern $Object.assign)
             (ref.extern $Object)
             (array $of<ext.ext>ext 

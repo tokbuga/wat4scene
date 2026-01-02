@@ -2,44 +2,56 @@
     (include "self/Object.wat")
     (include "self/WebAssembly.wat")
 
-    (data $canvas.wasm "wasm://canvas.wat")
+    (data $memory.wasm "wasm://memory/module.wat")
 
     (main $init
-        (local $memory      <WebAssembly.Memory>)
+        (call $assign_memory)
+        (async
+            (call $WebAssembly.compile<ext>ext (data.view $memory.wasm))
+            (then $onmemorymodule
+                (param $module   <WebAssembly.Module>)
+                (result                     <Promise>)
+                (call $WebAssembly.instantiate<ext>ext (this))
+            )
+            (then $onmemoryinstance
+                (param $memory   <WebAssembly.Instance>)
+                (local $exports                <Object>)
+
+                (call $Object.assign<ext.ext>
+                    (self)
+                    (call $WebAssembly.Instance:exports<ext>ext (this))
+                )
+
+                (console $log<ext> (self))
+                (console $log<ext> (this))
+            )
+        )
+    )
+
+    (func $assign_memory
         (local $descriptor    <MemoryDescriptor>)
-        (local $imports                 <Object>)
+        (local $memory      <WebAssembly.Memory>)
+        (local $buffer       <SharedArrayBuffer>)
+
+        (local $initial                      i32)
+        (local $maximum                      i32)
+        (local $shared                       i32)
+        (local $length                       i32)
+
+        (lset $initial  i32(1000))
+        (lset $maximum  i32(1000))
+        (lset $shared   (true))
 
         (lset $descriptor
             (call $WebAssembly.MemoryDescriptor<i32.i32.i32>ext
-                i32(100) i32(100) (true)
+                (lget $initial) (lget $maximum) (lget $shared)
             )
         )
 
-        (lset $memory
-            (call $WebAssembly.Memory<ext>ext
-                (lget $descriptor)   
-            )
-        )
+        (lset $memory (call $WebAssembly.Memory<ext>ext (lget $descriptor)))
+        (lset $buffer (call $WebAssembly.Memory:buffer<ext>ext (lget $memory)))
 
-        (lset $imports 
-            (call $Object.fromEntry<ext.ext>ext
-                (text "memory") (lget $memory)
-            )
-        )
-
-        (console $log<ext> (lget $imports))
-
-        (async
-            (call $WebAssembly.instantiate<ext.ext>ext
-                (data.view $canvas.wasm) 
-                (call $Object.assign<ext.ext>ext
-                    (self) (lget $imports)
-                )
-            )
-            (then $oninstantiate
-                (param $instantiate <Object>)
-                (console $log<ext>    (this))
-            )
-        )
+        (reflect $set<ext.ext.ext> (self) (text "memory") (lget $memory))
+        (reflect $set<ext.ext.ext> (self) (text "buffer") (lget $buffer))
     )
 )

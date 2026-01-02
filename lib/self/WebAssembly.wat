@@ -1,16 +1,57 @@
 
     (func $WebAssembly.instantiate<ext.ext>ext
-        (param $source      <Buffer>)
-        (param $imports     <Object>)
-        (result            <Promise>)
+        (param $module             <WebAssembly.Module>)
+        (param $imports                        <Object>)
+        (result                               <Promise>)
 
         (reflect $apply<ext.ext.ext>ext
             (ref.extern $WebAssembly.instantiate)
             (ref.extern $WebAssembly)
             (array $of<ext.ext>ext 
-                (lget $source)
-                (lget $imports)
+                (lget $module) (lget $imports)
             )
+        )
+    )
+
+    (func $WebAssembly.instantiate<ext>ext
+        (param $module             <WebAssembly.Module>)
+        (result                               <Promise>)
+        
+        (call $WebAssembly.instantiate<ext.ext>ext (this) (self))
+    )
+
+    (func $WebAssembly.compile<ext>ext
+        (param $source                         <Buffer>)
+        (result                               <Promise>)
+        
+        (reflect $apply<ext.ext.ext>ext
+            (ref.extern $WebAssembly.compile)
+            (ref.extern $WebAssembly)
+            (array $of<ext>ext 
+                (lget $source)
+            )
+        )
+    )
+
+    (func $WebAssembly.Memory:buffer<ext>ext
+        (param $memory             <WebAssembly.Memory>)
+        (result         <SharedArrayBuffer|ArrayBuffer>)
+
+        (reflect $apply<ext.ext.ext>ext
+            (ref.extern $WebAssembly.Memory:buffer[get]) 
+            (this) 
+            (array)
+        )
+    )
+
+    (func $WebAssembly.Instance:exports<ext>ext
+        (param $instance         <WebAssembly.Instance>)
+        (result                                <Object>)
+
+        (reflect $apply<ext.ext.ext>ext
+            (ref.extern $WebAssembly.Instance:exports[get]) 
+            (this) 
+            (array)
         )
     )
 
