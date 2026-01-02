@@ -1,0 +1,2 @@
+
+    (import "self" "memory" (memory $shared (include "include/constant/MEMORY_INITIAL_PAGESIZE.i32") (include "include/constant/MEMORY_MAXIMUM_PAGESIZE.i32")  (include "include/constant/MEMORY_SHARED_BOOLEAN.str")))

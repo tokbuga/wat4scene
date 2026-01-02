@@ -1,5 +1,6 @@
 (module 
-    (import "self" "memory" (include "memory/definition.wat"))
+    (include "include/imports/memory.wat")
+    (include "include/imports/buffer.wat")
 
     (main $align
         (i32.store (i32.const 0) (i32.const 0))
