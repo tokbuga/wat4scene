@@ -3,12 +3,33 @@
 
     (func $get_inner_width<>f32     (result f32) (f32.load offset=16 (gget $module*)))
     (func $get_inner_height<>f32    (result f32) (f32.load offset=20 (gget $module*)))
-    (func $get_client_x<>f32        (result f32) (f32.load offset=24 (gget $module*)))
-    (func $get_client_y<>f32        (result f32) (f32.load offset=28 (gget $module*)))
+    (func $get_normalize_vec<>v128  (result v128) (v128.load offset=24 (gget $module*)))
+    
+    (func $get_denormalized_vec<>v128   (result v128) (v128.load offset=40 (gget $module*)))
+    (func $get_client_x<>f32        (result f32) (f32.load offset=40 (gget $module*)))
+    (func $get_client_y<>f32        (result f32) (f32.load offset=44 (gget $module*)))
+    (func $get_client_z<>f32        (result f32) (f32.load offset=48 (gget $module*)))
+    (func $get_client_w<>f32        (result f32) (f32.load offset=52 (gget $module*)))
+    
+    (func $get_normalized_x<>f32    (result f32) (f32.load offset=56 (gget $module*)))
+    (func $get_normalized_y<>f32    (result f32) (f32.load offset=60 (gget $module*)))
+    (func $get_normalized_z<>f32    (result f32) (f32.load offset=64 (gget $module*)))
+    (func $get_normalized_w<>f32    (result f32) (f32.load offset=68 (gget $module*)))
+    
     (func $set_inner_width<f32>     (param f32) (f32.store offset=16 (gget $module*) (arg0)))
     (func $set_inner_height<f32>    (param f32) (f32.store offset=20 (gget $module*) (arg0)))
-    (func $set_client_x<f32>        (param f32) (f32.store offset=24 (gget $module*) (arg0)))
-    (func $set_client_y<f32>        (param f32) (f32.store offset=28 (gget $module*) (arg0)))
+    (func $set_normalize_vec<v128>  (param v128) (v128.store offset=24 (gget $module*) (arg0)))
+    
+    (func $set_client_x<f32>        (param f32) (f32.store offset=40 (gget $module*) (arg0)))
+    (func $set_client_y<f32>        (param f32) (f32.store offset=44 (gget $module*) (arg0)))
+    (func $set_client_z<f32>        (param f32) (f32.store offset=48 (gget $module*) (arg0)))
+    (func $set_client_w<f32>        (param f32) (f32.store offset=52 (gget $module*) (arg0)))
+    
+    (func $set_normalized_vec<v128> (param v128) (v128.store offset=56 (gget $module*) (arg0)))
+    (func $set_normalized_x<f32>    (param f32) (f32.store offset=56 (gget $module*) (arg0)))
+    (func $set_normalized_y<f32>    (param f32) (f32.store offset=60 (gget $module*) (arg0)))
+    (func $set_normalized_z<f32>    (param f32) (f32.store offset=64 (gget $module*) (arg0)))
+    (func $set_normalized_w<f32>    (param f32) (f32.store offset=68 (gget $module*) (arg0)))
 
     (table $ref 16 externref)
 
@@ -28,6 +49,7 @@
     (main $canvas
         (call $prepareDocument)
         (call $setBodundingRect)
+        (call $setNormalizeVec)
 
         (async 
             (call $preparegpu)
@@ -102,6 +124,15 @@
             (tget $ref (gget $INDEX_ADAPTER))
             (args)
         )
+    )
+
+    (func $setNormalizeVec
+        (local $multiplier v128)
+
+        (lset $multiplier (f32x4.replace_lane 0 (this) (f32.div f32(1) (call $get_inner_width<>f32))))
+        (lset $multiplier (f32x4.replace_lane 1 (this) (f32.div (call $get_inner_width<>f32) (call $get_inner_height<>f32))))
+        
+        (call $set_normalize_vec<v128> (this))
     )
 
     (func $setBodundingRect
@@ -312,9 +343,16 @@
 
         (call $set_client_x<f32> (reflect $apply<ext.ext.ext>f32 (self $MouseEvent:clientX[get]) (this) (args)))
         (call $set_client_y<f32> (reflect $apply<ext.ext.ext>f32 (self $MouseEvent:clientY[get]) (this) (args)))
+
+        (call $render)
     )
 
     (func $render
-
+        (call $set_normalized_vec<v128>
+            (f32x4.mul 
+                (call $get_denormalized_vec<>v128)
+                (call $get_normalize_vec<>v128)
+            )
+        )
     )
 )
