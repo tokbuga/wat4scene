@@ -1,1 +1,1 @@
-cd lib && wat4wasm --input=index.wat --output=../index.html --untouched-window --wat2wasm=wat2wasm --enable-threads --apply=../assets/apply4wat.js --keep-unused-functions --debug-names --log-instance
+cd lib && wat4wasm --input=uuid.wat --output=../uuid.js --untouched-window --wat2wasm=wat2wasm --enable-threads --apply=../assets/apply4wat.js --keep-unused-functions --debug-names --log-instance

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script type="module">
+        import UUID from "./uuid.js"
+        import BigVec from "./node_modules/bigvec/index.js"
+
+        UUID.spawn().then(instance => {
+            const { exports: e } = instance;
+            console.log(e.add(BigVec.random()));
+            console.log(e.add(BigVec.random()));
+            console.log(e.add(BigVec.random()));
+            console.log(e.add(BigVec.random()));
+            console.log(instance);
+        });
+    </script>
+</head>
+
+</html>
