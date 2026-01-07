@@ -5,13 +5,19 @@
     <script type="module">
         import UUID from "./uuid.js"
         import BigVec from "./node_modules/bigvec/index.js"
+        import "./node_modules/turbouuid/index.js"
 
         UUID.spawn().then(instance => {
             const { exports: e } = instance;
+            Object.assign(self, e, { instance });
             console.log(e.add(BigVec.random()));
             console.log(e.add(BigVec.random()));
             console.log(e.add(BigVec.random()));
             console.log(e.add(BigVec.random()));
+            console.log(e.add(turboUUID()));
+            console.log(e.add(turboUUID()));
+            console.log(e.add(turboUUID()));
+            console.log(e.add(turboUUID()));
             console.log(instance);
         });
     </script>

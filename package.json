@@ -22,6 +22,7 @@
     "build": "sh build"
   },
   "dependencies": {
-    "bigvec": "^1.1.8"
+    "bigvec": "^1.1.8",
+    "turbouuid": "^0.0.4"
   }
 }
