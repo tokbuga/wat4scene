@@ -1,5 +1,5 @@
 (module
-    (memory $base 1 65535 shared)
+    (memory $base 10 65535 shared)
 
     (global $REGEXP_REPLACE_NON_WD      mut ext)
     (global $REGEXP_MATCH_AF09AF09      mut ext)
@@ -12,44 +12,39 @@
     (global $OFFSET_USABLE_BLOCK_COUNT  i32 i32(32))
 
     (global $OFFSET_IDX_BLOCKS_LENGTH   i32 i32(36))
-    (global $OFFSET_I8A_BLOCKS_LENGTH   i32 i32(40))
-    (global $OFFSET_I16_BLOCKS_LENGTH   i32 i32(44))
-    (global $OFFSET_I32_BLOCKS_LENGTH   i32 i32(48))
-    (global $OFFSET_I64_BLOCKS_LENGTH   i32 i32(52))
-    (global $OFFSET_I8B_BLOCKS_LENGTH   i32 i32(56))
+    (global $OFFSET_VAL_BLOCKS_LENGTH   i32 i32(40))
+    (global $OFFSET_I8A_BLOCKS_LENGTH   i32 i32(44))
+    (global $OFFSET_I16_BLOCKS_LENGTH   i32 i32(48))
+    (global $OFFSET_I32_BLOCKS_LENGTH   i32 i32(52))
+    (global $OFFSET_I64_BLOCKS_LENGTH   i32 i32(56))
+    (global $OFFSET_I8B_BLOCKS_LENGTH   i32 i32(60))
 
-    (global $OFFSET_IDX_BLOCKS_BEGIN    i32 i32(60))
-    (global $OFFSET_I8A_BLOCKS_BEGIN    i32 i32(64))
-    (global $OFFSET_I16_BLOCKS_BEGIN    i32 i32(68))
-    (global $OFFSET_I32_BLOCKS_BEGIN    i32 i32(72))
-    (global $OFFSET_I64_BLOCKS_BEGIN    i32 i32(76))
-    (global $OFFSET_I8B_BLOCKS_BEGIN    i32 i32(80))
+    (global $OFFSET_IDX_BLOCKS_BEGIN    i32 i32(64))
+    (global $OFFSET_VAL_BLOCKS_BEGIN    i32 i32(68))
+    (global $OFFSET_I8A_BLOCKS_BEGIN    i32 i32(72))
+    (global $OFFSET_I16_BLOCKS_BEGIN    i32 i32(76))
+    (global $OFFSET_I32_BLOCKS_BEGIN    i32 i32(80))
+    (global $OFFSET_I64_BLOCKS_BEGIN    i32 i32(84))
+    (global $OFFSET_I8B_BLOCKS_BEGIN    i32 i32(88))
     
-    (global $OFFSET_BLOCKS_END          i32 i32(84))
-    (global $OFFSET_USED_UUID_COUNT     i32 i32(88))
-    (global $OFFSET_USED_BLOCK_COUNT    i32 i32(92))
-    (global $OFFSET_NEXT_MEMORY_LENGTH  i32 i32(96))
-
-    (global $OFFSET_BLOCKS_OFFSET       i32 i32(100))
-    (global $OFFSET_IDX_BLOCKS_OFFSET   i32 i32(100))
-    (global $OFFSET_I8A_BLOCKS_OFFSET   i32 i32(104))
-    (global $OFFSET_I16_BLOCKS_OFFSET   i32 i32(108))
-    (global $OFFSET_I32_BLOCKS_OFFSET   i32 i32(112))
-    (global $OFFSET_I64_BLOCKS_OFFSET   i32 i32(116))
-    (global $OFFSET_I8B_BLOCKS_OFFSET   i32 i32(120))
-
-    (global $HEADERS_LENGTH             i32 i32(128))
-    (global $BYTES_PER_UUID             i32 i32(20))
-    (global $LENGTH_OF_UUID             i32 i32(16))
-    (global $UUID_PER_BLOCK             i32 i32(16))
-    (global $BYTES_PER_PAGE             i32 i32(65536))
+    (global $OFFSET_BLOCKS_END          i32 i32(92))
+    (global $OFFSET_USED_UUID_COUNT     i32 i32(96))
+    (global $OFFSET_USED_BLOCK_COUNT    i32 i32(100))
+    (global $OFFSET_NEXT_MEMORY_LENGTH  i32 i32(104))
 
     (global $BYTES_PER_IDX_ELEMENT      i32 i32(4))
+    (global $BYTES_PER_VAL_ELEMENT      i32 i32(16))
     (global $BYTES_PER_I8A_ELEMENT      i32 i32(1))
     (global $BYTES_PER_I16_ELEMENT      i32 i32(2))
     (global $BYTES_PER_I32_ELEMENT      i32 i32(4))
     (global $BYTES_PER_I64_ELEMENT      i32 i32(8))
     (global $BYTES_PER_I8B_ELEMENT      i32 i32(1))
+
+    (global $HEADERS_LENGTH             i32 i32(128))
+    (global $BYTES_PER_UUID             i32 i32(36))
+    (global $LENGTH_OF_UUID             i32 i32(16))
+    (global $UUID_PER_BLOCK             i32 i32(16))
+    (global $BYTES_PER_PAGE             i32 i32(65536))
 
     (global $offset.i8a                 i32 i32(0))
     (global $offset.i16                 i32 i32(1))
@@ -65,6 +60,7 @@
     (func $set_usable_block_count<i32>  (param i32) (i32.store (gget $OFFSET_USABLE_BLOCK_COUNT) (arg0)))
 
     (func $set_idx_blocks_length<i32>   (param i32) (i32.store (gget $OFFSET_IDX_BLOCKS_LENGTH) (arg0)))
+    (func $set_val_blocks_length<i32>   (param i32) (i32.store (gget $OFFSET_VAL_BLOCKS_LENGTH) (arg0)))
     (func $set_i8a_blocks_length<i32>   (param i32) (i32.store (gget $OFFSET_I8A_BLOCKS_LENGTH) (arg0)))
     (func $set_i16_blocks_length<i32>   (param i32) (i32.store (gget $OFFSET_I16_BLOCKS_LENGTH) (arg0)))
     (func $set_i32_blocks_length<i32>   (param i32) (i32.store (gget $OFFSET_I32_BLOCKS_LENGTH) (arg0)))
@@ -72,6 +68,7 @@
     (func $set_i8b_blocks_length<i32>   (param i32) (i32.store (gget $OFFSET_I8B_BLOCKS_LENGTH) (arg0)))
 
     (func $set_idx_blocks_begin<i32>    (param i32) (i32.store (gget $OFFSET_IDX_BLOCKS_BEGIN) (arg0)))
+    (func $set_val_blocks_begin<i32>    (param i32) (i32.store (gget $OFFSET_VAL_BLOCKS_BEGIN) (arg0)))
     (func $set_i8a_blocks_begin<i32>    (param i32) (i32.store (gget $OFFSET_I8A_BLOCKS_BEGIN) (arg0)))
     (func $set_i16_blocks_begin<i32>    (param i32) (i32.store (gget $OFFSET_I16_BLOCKS_BEGIN) (arg0)))
     (func $set_i32_blocks_begin<i32>    (param i32) (i32.store (gget $OFFSET_I32_BLOCKS_BEGIN) (arg0)))
@@ -91,6 +88,7 @@
     (func $get_usable_block_count<>i32  (result i32) (i32.load (gget $OFFSET_USABLE_BLOCK_COUNT)))
 
     (func $get_idx_blocks_length<>i32   (result i32) (i32.load (gget $OFFSET_IDX_BLOCKS_LENGTH)))
+    (func $get_val_blocks_length<>i32   (result i32) (i32.load (gget $OFFSET_VAL_BLOCKS_LENGTH)))
     (func $get_i8a_blocks_length<>i32   (result i32) (i32.load (gget $OFFSET_I8A_BLOCKS_LENGTH)))
     (func $get_i16_blocks_length<>i32   (result i32) (i32.load (gget $OFFSET_I16_BLOCKS_LENGTH)))
     (func $get_i32_blocks_length<>i32   (result i32) (i32.load (gget $OFFSET_I32_BLOCKS_LENGTH)))
@@ -98,6 +96,7 @@
     (func $get_i8b_blocks_length<>i32   (result i32) (i32.load (gget $OFFSET_I8B_BLOCKS_LENGTH)))
 
     (func $get_idx_blocks_begin<>i32    (result i32) (i32.load (gget $OFFSET_IDX_BLOCKS_BEGIN)))
+    (func $get_val_blocks_begin<>i32    (result i32) (i32.load (gget $OFFSET_VAL_BLOCKS_BEGIN)))
     (func $get_i8a_blocks_begin<>i32    (result i32) (i32.load (gget $OFFSET_I8A_BLOCKS_BEGIN)))
     (func $get_i16_blocks_begin<>i32    (result i32) (i32.load (gget $OFFSET_I16_BLOCKS_BEGIN)))
     (func $get_i32_blocks_begin<>i32    (result i32) (i32.load (gget $OFFSET_I32_BLOCKS_BEGIN)))
@@ -114,6 +113,7 @@
     (func $random<>i64                  (result i64) (i64.reinterpret_f64 (call $self.Math.random<>f64)))
 
     (func $get_idx_uuid_value<i32>i32   (param $offset i32) (result i32) (u32.load (lget $offset)))
+    (func $get_val_uuid_value<i32>i32   (param $offset i32) (result i32) (u32.load (lget $offset)))
     (func $get_i8a_uuid_value<i32>i32   (param $offset i32) (result i32) (u8.load  (lget $offset)))
     (func $get_i16_uuid_value<i32>i32   (param $offset i32) (result i32) (u16.load (lget $offset)))
     (func $get_i32_uuid_value<i32>i32   (param $offset i32) (result i32) (u32.load (lget $offset)))
@@ -121,6 +121,7 @@
     (func $get_i8b_uuid_value<i32>i32   (param $offset i32) (result i32) (u8.load  (lget $offset)))
 
     (func $set_idx_uuid_value<i32.i32>  (param $offset i32) (param $value i32) (u32.store (lget $offset) (lget $value)))
+    (func $set_val_uuid_value<i32.i32>  (param $offset i32) (param $value i32) (u32.store (lget $offset) (lget $value)))
     (func $set_i8a_uuid_value<i32.i32>  (param $offset i32) (param $value i32) (u8.store  (lget $offset) (lget $value)))
     (func $set_i16_uuid_value<i32.i32>  (param $offset i32) (param $value i32) (u16.store (lget $offset) (lget $value)))
     (func $set_i32_uuid_value<i32.i32>  (param $offset i32) (param $value i32) (u32.store (lget $offset) (lget $value)))
@@ -128,6 +129,7 @@
     (func $set_i8b_uuid_value<i32.i32>  (param $offset i32) (param $value i32) (u8.store  (lget $offset) (lget $value)))
 
     (func $calc_idx_uuid_begin<i32>i32  (param $index i32) (result i32) (i32.add (i32.mul (lget $index) (gget $BYTES_PER_IDX_ELEMENT)) (call $get_idx_blocks_begin<>i32)))
+    (func $calc_val_uuid_begin<i32>i32  (param $index i32) (result i32) (i32.add (i32.mul (lget $index) (gget $BYTES_PER_VAL_ELEMENT)) (call $get_val_blocks_begin<>i32)))
     (func $calc_i8a_uuid_begin<i32>i32  (param $index i32) (result i32) (i32.add (i32.mul (lget $index) (gget $BYTES_PER_I8A_ELEMENT)) (call $get_i8a_blocks_begin<>i32)))
     (func $calc_i16_uuid_begin<i32>i32  (param $index i32) (result i32) (i32.add (i32.mul (lget $index) (gget $BYTES_PER_I16_ELEMENT)) (call $get_i16_blocks_begin<>i32)))
     (func $calc_i32_uuid_begin<i32>i32  (param $index i32) (result i32) (i32.add (i32.mul (lget $index) (gget $BYTES_PER_I32_ELEMENT)) (call $get_i32_blocks_begin<>i32)))
@@ -143,6 +145,7 @@
         (local $usableBlockCount i32)
 
         (local $length/idx i32)
+        (local $length/val i32)
         (local $length/i8a i32)
         (local $length/i16 i32)
         (local $length/i32 i32)
@@ -151,6 +154,7 @@
 
         (local $offset i32)
         (local $offset.idx i32)
+        (local $offset.val i32)
         (local $offset.i8a i32)
         (local $offset.i16 i32)
         (local $offset.i32 i32)
@@ -172,13 +176,15 @@
         (call $set_usable_block_count<i32>  (lget $usableBlockCount))
 
         (lset $length/idx (i32.mul (gget $BYTES_PER_IDX_ELEMENT) (lget $usableUUIDCount)))
+        (lset $length/val (i32.mul (gget $BYTES_PER_VAL_ELEMENT) (lget $usableUUIDCount)))
         (lset $length/i8a (i32.mul (gget $BYTES_PER_I8A_ELEMENT) (lget $usableUUIDCount)))
+        (lset $length/i8b (i32.mul (gget $BYTES_PER_I8B_ELEMENT) (lget $usableUUIDCount)))
         (lset $length/i16 (i32.mul (gget $BYTES_PER_I16_ELEMENT) (lget $usableUUIDCount)))
         (lset $length/i32 (i32.mul (gget $BYTES_PER_I32_ELEMENT) (lget $usableUUIDCount)))
         (lset $length/i64 (i32.mul (gget $BYTES_PER_I64_ELEMENT) (lget $usableUUIDCount)))
-        (lset $length/i8b (i32.mul (gget $BYTES_PER_I8B_ELEMENT) (lget $usableUUIDCount)))
 
         (call $set_idx_blocks_length<i32> (lget $length/idx))
+        (call $set_val_blocks_length<i32> (lget $length/val))
         (call $set_i8a_blocks_length<i32> (lget $length/i8a))
         (call $set_i16_blocks_length<i32> (lget $length/i16))
         (call $set_i32_blocks_length<i32> (lget $length/i32))
@@ -187,6 +193,7 @@
 
         (lset $offset (gget $HEADERS_LENGTH))
         (lset $offset (i32.add (lget $length/idx) (ltee $offset.idx (lget $offset))))
+        (lset $offset (i32.add (lget $length/val) (ltee $offset.val (lget $offset))))
         (lset $offset (i32.add (lget $length/i8a) (ltee $offset.i8a (lget $offset))))
         (lset $offset (i32.add (lget $length/i16) (ltee $offset.i16 (lget $offset))))
         (lset $offset (i32.add (lget $length/i32) (ltee $offset.i32 (lget $offset))))
@@ -195,15 +202,15 @@
         (call $set_blocks_end<i32> (lget $offset))    
 
         (call $set_idx_blocks_begin<i32> (lget $offset.idx))    
+        (call $set_val_blocks_begin<i32> (lget $offset.val))    
         (call $set_i8a_blocks_begin<i32> (lget $offset.i8a))    
         (call $set_i16_blocks_begin<i32> (lget $offset.i16))    
         (call $set_i32_blocks_begin<i32> (lget $offset.i32))    
         (call $set_i64_blocks_begin<i32> (lget $offset.i64))    
         (call $set_i8b_blocks_begin<i32> (lget $offset.i8b))    
 
-        (call $set_used_uuid_count<>i32 i32(1))
-        (call $set_used_block_count<>i32 i32(1))
-        (call $set_next_memory_length<>i32 (i32.mul (lget $memoryLength) i32(10)))
+        (call $set_used_uuid_count<>i32     i32(1))
+        (call $set_used_block_count<>i32    i32(1))
 
         (gset $REGEXP_REPLACE_NON_WD 
             (reflect $construct<ext.ext>ext
@@ -492,7 +499,8 @@
 
     (func $add
         (export "add")
-        (param $UUIDv4 <String>)
+        (param $uuid        ext)
+        (param $value.val   i32)
         (result             i32)
 
         (local $value.idx   i32)
@@ -503,28 +511,30 @@
         (local $value.i8b   i32)
 
         (local $begin.idx   i32)
+        (local $begin.val   i32)
         (local $begin.i8a   i32)
         (local $begin.i16   i32)
         (local $begin.i32   i32)
         (local $begin.i64   i32)
         (local $begin.i8b   i32)
 
-        (lget $UUIDv4)
-        (ltee $UUIDv4 (call $self.String<ext>ext))
-        (ltee $UUIDv4 (call $replace_for_clean_str<ext>ext))
-        (ltee $UUIDv4 (call $match_for_hex_array<ext>ext))
-        (ltee $UUIDv4 (call $map_with_parse_int<ext>ext))
-        (ltee $UUIDv4 (call $new_array_bufferFromIntArray<ext>ext))
-        (lset $UUIDv4 (call $new_data_view<ext>ext))
+        (lget $uuid)
+        (ltee $uuid (call $self.String<ext>ext))
+        (ltee $uuid (call $replace_for_clean_str<ext>ext))
+        (ltee $uuid (call $match_for_hex_array<ext>ext))
+        (ltee $uuid (call $map_with_parse_int<ext>ext))
+        (ltee $uuid (call $new_array_bufferFromIntArray<ext>ext))
+        (lset $uuid (call $new_data_view<ext>ext))
 
         (lset $value.idx (call $add_used_uuid_count_1<>i32))
-        (lset $value.i8a (call $get_i8a_uuid_value<ext>i32 (lget $UUIDv4)))
-        (lset $value.i16 (call $get_i16_uuid_value<ext>i32 (lget $UUIDv4)))
-        (lset $value.i32 (call $get_i32_uuid_value<ext>i32 (lget $UUIDv4)))
-        (lset $value.i64 (call $get_i64_uuid_value<ext>i64 (lget $UUIDv4)))
-        (lset $value.i8b (call $get_i8b_uuid_value<ext>i32 (lget $UUIDv4)))
+        (lset $value.i8a (call $get_i8a_uuid_value<ext>i32 (lget $uuid)))
+        (lset $value.i16 (call $get_i16_uuid_value<ext>i32 (lget $uuid)))
+        (lset $value.i32 (call $get_i32_uuid_value<ext>i32 (lget $uuid)))
+        (lset $value.i64 (call $get_i64_uuid_value<ext>i64 (lget $uuid)))
+        (lset $value.i8b (call $get_i8b_uuid_value<ext>i32 (lget $uuid)))
 
         (lset $begin.idx (call $calc_idx_uuid_begin<i32>i32 (lget $value.idx)))
+        (lset $begin.val (call $calc_val_uuid_begin<i32>i32 (lget $value.idx)))
         (lset $begin.i8a (call $calc_i8a_uuid_begin<i32>i32 (lget $value.idx)))
         (lset $begin.i16 (call $calc_i16_uuid_begin<i32>i32 (lget $value.idx)))
         (lset $begin.i32 (call $calc_i32_uuid_begin<i32>i32 (lget $value.idx)))
@@ -532,6 +542,7 @@
         (lset $begin.i8b (call $calc_i8b_uuid_begin<i32>i32 (lget $value.idx)))
 
         (call $set_idx_uuid_value<i32.i32> (lget $begin.idx) (lget $value.idx))
+        (call $set_val_uuid_value<i32.i32> (lget $begin.val) (lget $value.val))
         (call $set_i8a_uuid_value<i32.i32> (lget $begin.i8a) (lget $value.i8a))
         (call $set_i16_uuid_value<i32.i32> (lget $begin.i16) (lget $value.i16))
         (call $set_i32_uuid_value<i32.i32> (lget $begin.i32) (lget $value.i32))
@@ -541,10 +552,10 @@
         (lget $value.idx)
     )
 
-    (func $new
-        (export "new")
+    (func $next
+        (export "next")
+        (param $value.val   i32)
         (result i32)
-
         (local $value.idx   i32)
         (local $value.i8a   i32)
         (local $value.i16   i32)
@@ -553,6 +564,7 @@
         (local $value.i8b   i32)
 
         (local $begin.idx   i32)
+        (local $begin.val   i32)
         (local $begin.i8a   i32)
         (local $begin.i16   i32)
         (local $begin.i32   i32)
@@ -567,6 +579,7 @@
         (lset $value.i8b (call $random<>i32))
 
         (lset $begin.idx (call $calc_idx_uuid_begin<i32>i32 (lget $value.idx)))
+        (lset $begin.val (call $calc_val_uuid_begin<i32>i32 (lget $value.idx)))
         (lset $begin.i8a (call $calc_i8a_uuid_begin<i32>i32 (lget $value.idx)))
         (lset $begin.i16 (call $calc_i16_uuid_begin<i32>i32 (lget $value.idx)))
         (lset $begin.i32 (call $calc_i32_uuid_begin<i32>i32 (lget $value.idx)))
@@ -574,6 +587,7 @@
         (lset $begin.i8b (call $calc_i8b_uuid_begin<i32>i32 (lget $value.idx)))
 
         (call $set_idx_uuid_value<i32.i32> (lget $begin.idx) (lget $value.idx))
+        (call $set_val_uuid_value<i32.i32> (lget $begin.val) (lget $value.val))
         (call $set_i8a_uuid_value<i32.i32> (lget $begin.i8a) (lget $value.i8a))
         (call $set_i16_uuid_value<i32.i32> (lget $begin.i16) (lget $value.i16))
         (call $set_i32_uuid_value<i32.i32> (lget $begin.i32) (lget $value.i32))
@@ -583,8 +597,8 @@
         (lget $value.idx)
     )
 
-    (func $get
-        (export "get")
+    (func $toString
+        (export "toString")
         (param $index i32)
         (result  <String>)
 
@@ -592,6 +606,24 @@
             (call $new_uint8_array<ext>ext 
                 (call $get_uuid_buffer<i32>ext (this))
             )
+        )
+    )
+
+    (func $valueOf
+        (export "valueOf")
+        (param $index i32)
+        (result i32)
+        (call $get_val_uuid_value<i32>i32 (call $calc_val_uuid_begin<i32>i32 (this)))
+    )
+
+    (func $set
+        (export "set")
+        (param $index i32)
+        (param $value i32)
+
+        (call $set_val_uuid_value<i32.i32> 
+            (call $calc_val_uuid_begin<i32>i32 (this))
+            (lget $value)
         )
     )
 
@@ -648,6 +680,7 @@
         (console $log<ext.i32> (text "usable_block_count")  (call $get_usable_block_count<>i32))
 
         (console $log<ext.i32> (text "idx_blocks_length")   (call $get_idx_blocks_length<>i32))
+        (console $log<ext.i32> (text "val_blocks_length")   (call $get_val_blocks_length<>i32))
         (console $log<ext.i32> (text "i8a_blocks_length")   (call $get_i8a_blocks_length<>i32))
         (console $log<ext.i32> (text "i16_blocks_length")   (call $get_i16_blocks_length<>i32))
         (console $log<ext.i32> (text "i32_blocks_length")   (call $get_i32_blocks_length<>i32))
@@ -655,6 +688,7 @@
         (console $log<ext.i32> (text "i8b_blocks_length")   (call $get_i8b_blocks_length<>i32))
 
         (console $log<ext.i32> (text "idx_blocks_begin")    (call $get_idx_blocks_begin<>i32))
+        (console $log<ext.i32> (text "val_blocks_begin")    (call $get_val_blocks_begin<>i32))
         (console $log<ext.i32> (text "i8a_blocks_begin")    (call $get_i8a_blocks_begin<>i32))
         (console $log<ext.i32> (text "i16_blocks_begin")    (call $get_i16_blocks_begin<>i32))
         (console $log<ext.i32> (text "i32_blocks_begin")    (call $get_i32_blocks_begin<>i32))
