@@ -230,7 +230,7 @@
                     (local.set $offset.i32x4 (i32.mul (local.get $blocks.index) (i32.const  64)))
                     (local.set $offset.i64x2 (i32.mul (local.get $blocks.index) (i32.const 128)))
 
-                    (local.set $blocks.index (i32.add (local.get $blocks.index) (i32.const 1)))
+                    (local.set $blocks.index (i32.add (local.get $blocks.index) (i32.const 1))) 
                     (local.set $blocks.count (i32.sub (local.get $blocks.count) (i32.const 1)))
                 
                     (br_if $blocks (i8x16.all_true (i8x16.ne (local.get $i8b.splat) (v128.load $i8b offset=0 (local.get $offset.i8x16)))))
