@@ -10,15 +10,9 @@
         UUID.spawn().then(instance => {
             const { exports: e } = instance;
             Object.assign(self, e, { instance });
-            console.log(e.add(BigVec.random()));
-            console.log(e.add(BigVec.random()));
-            console.log(e.add(BigVec.random()));
-            console.log(e.add(BigVec.random()));
-            console.log(e.add(turboUUID()));
-            console.log(e.add(turboUUID()));
-            console.log(e.add(turboUUID()));
-            console.log(e.add(turboUUID()));
+            console.log(e);
             console.log(instance);
+
         });
     </script>
 </head>
