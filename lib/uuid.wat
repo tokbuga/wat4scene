@@ -8,42 +8,64 @@
     (memory $idx  4 65535 shared)
     (memory $val 16 65535 shared)
 
-    (export "setUint8"      (func $setUint8))
-    (export "setUint16"     (func $setUint16))
-    (export "setUint32"     (func $setUint32))
-    (export "setBigUint64"  (func $setBigUint64))
-    (export "setInt8"       (func $setInt8))
-    (export "setInt16"      (func $setInt16))
-    (export "setInt32"      (func $setInt32))
-    (export "setBigInt64"   (func $setBigInt64))
-    (export "setFloat32"    (func $setFloat32))
-    (export "setFloat64"    (func $setFloat64))
+    (export "setUint8ByIndex"        (func $storeUint8))
+    (export "setUint16ByIndex"       (func $storeUint16))
+    (export "setUint32ByIndex"       (func $storeUint32))
+    (export "setBigUint64ByIndex"    (func $storeBigUint64))
+    (export "setInt8ByIndex"         (func $storeInt8))
+    (export "setInt16ByIndex"        (func $storeInt16))
+    (export "setInt32ByIndex"        (func $storeInt32))
+    (export "setBigInt64ByIndex"     (func $storeBigInt64))
+    (export "setFloat32ByIndex"      (func $storeFloat32))
+    (export "setFloat64ByIndex"      (func $storeFloat64))
 
-    (export "getUint8"      (func $getUint8))
-    (export "getUint16"     (func $getUint16))
-    (export "getUint32"     (func $getUint32))
-    (export "getBigUint64"  (func $getBigUint64))
-    (export "getInt8"       (func $getInt8))
-    (export "getInt16"      (func $getInt16))
-    (export "getInt32"      (func $getInt32))
-    (export "getBigInt64"   (func $getBigInt64))
-    (export "getFloat32"    (func $getFloat32))
-    (export "getFloat64"    (func $getFloat64))
+    (export "setUint8ByUUID"          (func $setUint8))
+    (export "setUint16ByUUID"         (func $setUint16))
+    (export "setUint32ByUUID"         (func $setUint32))
+    (export "setBigUint64ByUUID"      (func $setBigUint64))
+    (export "setInt8ByUUID"           (func $setInt8))
+    (export "setInt16ByUUID"          (func $setInt16))
+    (export "setInt32ByUUID"          (func $setInt32))
+    (export "setBigInt64ByUUID"       (func $setBigInt64))
+    (export "setFloat32ByUUID"        (func $setFloat32))
+    (export "setFloat64ByUUID"        (func $setFloat64))
 
-    (export "newUint8"      (func $newUint8))
-    (export "newUint16"     (func $newUint16))
-    (export "newUint32"     (func $newUint32))
-    (export "newBigUint64"  (func $newBigUint64))
-    (export "newInt8"       (func $newInt8))
-    (export "newInt16"      (func $newInt16))
-    (export "newInt32"      (func $newInt32))
-    (export "newBigInt64"   (func $newBigInt64))
-    (export "newFloat32"    (func $newFloat32))
-    (export "newFloat64"    (func $newFloat64))
+    (export "getUint8ByIndex"         (func $loadUint8))
+    (export "getUint16ByIndex"        (func $loadUint16))
+    (export "getUint32ByIndex"        (func $loadUint32))
+    (export "getBigUint64ByIndex"     (func $loadBigUint64))
+    (export "getInt8ByIndex"          (func $loadInt8))
+    (export "getInt16ByIndex"         (func $loadInt16))
+    (export "getInt32ByIndex"         (func $loadInt32))
+    (export "getBigInt64ByIndex"      (func $loadBigInt64))
+    (export "getFloat32ByIndex"       (func $loadFloat32))
+    (export "getFloat64ByIndex"       (func $loadFloat64))
 
-    (export "indexOf"       (func $indexOf))
-    (export "toString"      (func $toString))
-    (export "count"         (func $count))
+    (export "getUint8ByUUID"          (func $getUint8))
+    (export "getUint16ByUUID"         (func $getUint16))
+    (export "getUint32ByUUID"         (func $getUint32))
+    (export "getBigUint64ByUUID"      (func $getBigUint64))
+    (export "getInt8ByUUID"           (func $getInt8))
+    (export "getInt16ByUUID"          (func $getInt16))
+    (export "getInt32ByUUID"          (func $getInt32))
+    (export "getBigInt64ByUUID"       (func $getBigInt64))
+    (export "getFloat32ByUUID"        (func $getFloat32))
+    (export "getFloat64ByUUID"        (func $getFloat64))
+
+    (export "putUint8WithRandom"       (func $randomUint8))
+    (export "putUint16WithRandom"      (func $randomUint16))
+    (export "putUint32WithRandom"      (func $randomUint32))
+    (export "putBigUint64WithRandom"   (func $randomBigUint64))
+    (export "putInt8WithRandom"        (func $randomInt8))
+    (export "putInt16WithRandom"       (func $randomInt16))
+    (export "putInt32WithRandom"       (func $randomInt32))
+    (export "putBigInt64WithRandom"    (func $randomBigInt64))
+    (export "putFloat32WithRandom"     (func $randomFloat32))
+    (export "putFloat64WithRandom"     (func $randomFloat64))
+
+    (export "indexOf"           (func $indexOf))
+    (export "toString"          (func $toString))
+    (export "count"             (func $count))
 
     (global $OFFSET_UUID_COUNT   i32 (i32.const 36))
     (global $OFFSET_BLOCK_COUNT  i32 (i32.const 44))
@@ -58,44 +80,66 @@
     (global $ARGUMENTS_REGEXP_MATCH_I64 mut ext)
     (global $ARGUMENTS_REGEXP_TO_STRING mut ext)
 
-    (func $setUint8     (param i32) (param i32)  (if (local.get 0) (then (return (i32.store8   $val (i32.mul (i32.const 16) (local.get 0)) (local.get 1))))) (unreachable))
-    (func $setUint16    (param i32) (param i32)  (if (local.get 0) (then (return (i32.store16  $val (i32.mul (i32.const 16) (local.get 0)) (local.get 1))))) (unreachable))
-    (func $setUint32    (param i32) (param i32)  (if (local.get 0) (then (return (i32.store    $val (i32.mul (i32.const 16) (local.get 0)) (local.get 1))))) (unreachable))
-    (func $setBigUint64 (param i32) (param i64)  (if (local.get 0) (then (return (i64.store    $val (i32.mul (i32.const 16) (local.get 0)) (local.get 1))))) (unreachable))
-    (func $setInt8      (param i32) (param i32)  (if (local.get 0) (then (return (i32.store8   $val (i32.mul (i32.const 16) (local.get 0)) (local.get 1))))) (unreachable))
-    (func $setInt16     (param i32) (param i32)  (if (local.get 0) (then (return (i32.store16  $val (i32.mul (i32.const 16) (local.get 0)) (local.get 1))))) (unreachable))
-    (func $setInt32     (param i32) (param i32)  (if (local.get 0) (then (return (i32.store    $val (i32.mul (i32.const 16) (local.get 0)) (local.get 1))))) (unreachable))
-    (func $setBigInt64  (param i32) (param i64)  (if (local.get 0) (then (return (i64.store    $val (i32.mul (i32.const 16) (local.get 0)) (local.get 1))))) (unreachable))
-    (func $setFloat32   (param i32) (param f32)  (if (local.get 0) (then (return (f32.store    $val (i32.mul (i32.const 16) (local.get 0)) (local.get 1))))) (unreachable))
-    (func $setFloat64   (param i32) (param f64)  (if (local.get 0) (then (return (f64.store    $val (i32.mul (i32.const 16) (local.get 0)) (local.get 1))))) (unreachable))
+    (func $storeUint8       (param i32) (param i32) (i32.store8  $val (i32.mul (i32.const 16) (local.get 0)) (local.get 1)))
+    (func $storeUint16      (param i32) (param i32) (i32.store16 $val (i32.mul (i32.const 16) (local.get 0)) (local.get 1)))
+    (func $storeUint32      (param i32) (param i32) (i32.store   $val (i32.mul (i32.const 16) (local.get 0)) (local.get 1)))
+    (func $storeBigUint64   (param i32) (param i64) (i64.store   $val (i32.mul (i32.const 16) (local.get 0)) (local.get 1)))
+    (func $storeInt8        (param i32) (param i32) (i32.store8  $val (i32.mul (i32.const 16) (local.get 0)) (local.get 1)))
+    (func $storeInt16       (param i32) (param i32) (i32.store16 $val (i32.mul (i32.const 16) (local.get 0)) (local.get 1)))
+    (func $storeInt32       (param i32) (param i32) (i32.store   $val (i32.mul (i32.const 16) (local.get 0)) (local.get 1)))
+    (func $storeBigInt64    (param i32) (param i64) (i64.store   $val (i32.mul (i32.const 16) (local.get 0)) (local.get 1)))
+    (func $storeFloat32     (param i32) (param f32) (f32.store   $val (i32.mul (i32.const 16) (local.get 0)) (local.get 1)))
+    (func $storeFloat64     (param i32) (param f64) (f64.store   $val (i32.mul (i32.const 16) (local.get 0)) (local.get 1)))
 
-    (func $getUint8     (param i32) (result i32) (if (local.get 0) (then (return (i32.load8_u  $val (i32.mul (i32.const 16) (local.get 0)))))) (i32.const 0))
-    (func $getUint16    (param i32) (result i32) (if (local.get 0) (then (return (i32.load16_u $val (i32.mul (i32.const 16) (local.get 0)))))) (i32.const 0))
-    (func $getUint32    (param i32) (result i32) (if (local.get 0) (then (return (i32.load     $val (i32.mul (i32.const 16) (local.get 0)))))) (i32.const 0))
-    (func $getBigUint64 (param i32) (result i64) (if (local.get 0) (then (return (i64.load     $val (i32.mul (i32.const 16) (local.get 0)))))) (i64.const 0))
-    (func $getInt8      (param i32) (result i32) (if (local.get 0) (then (return (i32.load8_s  $val (i32.mul (i32.const 16) (local.get 0)))))) (i32.const 0))
-    (func $getInt16     (param i32) (result i32) (if (local.get 0) (then (return (i32.load16_s $val (i32.mul (i32.const 16) (local.get 0)))))) (i32.const 0))
-    (func $getInt32     (param i32) (result i32) (if (local.get 0) (then (return (i32.load     $val (i32.mul (i32.const 16) (local.get 0)))))) (i32.const 0))
-    (func $getBigInt64  (param i32) (result i64) (if (local.get 0) (then (return (i64.load     $val (i32.mul (i32.const 16) (local.get 0)))))) (i64.const 0))
-    (func $getFloat32   (param i32) (result f32) (if (local.get 0) (then (return (f32.load     $val (i32.mul (i32.const 16) (local.get 0)))))) (f32.const nan))
-    (func $getFloat64   (param i32) (result f64) (if (local.get 0) (then (return (f64.load     $val (i32.mul (i32.const 16) (local.get 0)))))) (f64.const nan))
+    (func $setUint8         (param externref) (param i32) (call $storeUint8     (call $indexOf (local.get 0)) (local.get 1)))
+    (func $setUint16        (param externref) (param i32) (call $storeUint16    (call $indexOf (local.get 0)) (local.get 1)))
+    (func $setUint32        (param externref) (param i32) (call $storeUint32    (call $indexOf (local.get 0)) (local.get 1)))
+    (func $setBigUint64     (param externref) (param i64) (call $storeBigUint64 (call $indexOf (local.get 0)) (local.get 1)))
+    (func $setInt8          (param externref) (param i32) (call $storeInt8      (call $indexOf (local.get 0)) (local.get 1)))
+    (func $setInt16         (param externref) (param i32) (call $storeInt16     (call $indexOf (local.get 0)) (local.get 1)))
+    (func $setInt32         (param externref) (param i32) (call $storeInt32     (call $indexOf (local.get 0)) (local.get 1)))
+    (func $setBigInt64      (param externref) (param i64) (call $storeBigInt64  (call $indexOf (local.get 0)) (local.get 1)))
+    (func $setFloat32       (param externref) (param f32) (call $storeFloat32   (call $indexOf (local.get 0)) (local.get 1)))
+    (func $setFloat64       (param externref) (param f64) (call $storeFloat64   (call $indexOf (local.get 0)) (local.get 1)))
 
-    (func $newUint8     (param i32) (result i32) (local i32) (i32.store8   $val (i32.mul (i32.const 16) (local.tee 1 (call $new_random_index))) (local.get 0)) (local.get 1))
-    (func $newUint16    (param i32) (result i32) (local i32) (i32.store16  $val (i32.mul (i32.const 16) (local.tee 1 (call $new_random_index))) (local.get 0)) (local.get 1))
-    (func $newUint32    (param i32) (result i32) (local i32) (i32.store    $val (i32.mul (i32.const 16) (local.tee 1 (call $new_random_index))) (local.get 0)) (local.get 1))
-    (func $newBigUint64 (param i64) (result i32) (local i32) (i64.store    $val (i32.mul (i32.const 16) (local.tee 1 (call $new_random_index))) (local.get 0)) (local.get 1))
-    (func $newInt8      (param i32) (result i32) (local i32) (i32.store8   $val (i32.mul (i32.const 16) (local.tee 1 (call $new_random_index))) (local.get 0)) (local.get 1))
-    (func $newInt16     (param i32) (result i32) (local i32) (i32.store16  $val (i32.mul (i32.const 16) (local.tee 1 (call $new_random_index))) (local.get 0)) (local.get 1))
-    (func $newInt32     (param i32) (result i32) (local i32) (i32.store    $val (i32.mul (i32.const 16) (local.tee 1 (call $new_random_index))) (local.get 0)) (local.get 1))
-    (func $newBigInt64  (param i64) (result i32) (local i32) (i64.store    $val (i32.mul (i32.const 16) (local.tee 1 (call $new_random_index))) (local.get 0)) (local.get 1))
-    (func $newFloat32   (param f32) (result i32) (local i32) (f32.store    $val (i32.mul (i32.const 16) (local.tee 1 (call $new_random_index))) (local.get 0)) (local.get 1))
-    (func $newFloat64   (param f64) (result i32) (local i32) (f64.store    $val (i32.mul (i32.const 16) (local.tee 1 (call $new_random_index))) (local.get 0)) (local.get 1))
+    (func $loadUint8        (param i32) (result i32) (i32.load8_u  $val (i32.mul (i32.const 16) (local.get 0))))
+    (func $loadUint16       (param i32) (result i32) (i32.load16_u $val (i32.mul (i32.const 16) (local.get 0))))
+    (func $loadUint32       (param i32) (result i32) (i32.load     $val (i32.mul (i32.const 16) (local.get 0))))
+    (func $loadBigUint64    (param i32) (result i64) (i64.load     $val (i32.mul (i32.const 16) (local.get 0))))
+    (func $loadInt8         (param i32) (result i32) (i32.load8_s  $val (i32.mul (i32.const 16) (local.get 0))))
+    (func $loadInt16        (param i32) (result i32) (i32.load16_s $val (i32.mul (i32.const 16) (local.get 0))))
+    (func $loadInt32        (param i32) (result i32) (i32.load     $val (i32.mul (i32.const 16) (local.get 0))))
+    (func $loadBigInt64     (param i32) (result i64) (i64.load     $val (i32.mul (i32.const 16) (local.get 0))))
+    (func $loadFloat32      (param i32) (result f32) (f32.load     $val (i32.mul (i32.const 16) (local.get 0))))
+    (func $loadFloat64      (param i32) (result f64) (f64.load     $val (i32.mul (i32.const 16) (local.get 0))))
+
+    (func $getUint8         (param externref) (result i32) (call $loadUint8     (call $indexOf (local.get 0))))
+    (func $getUint16        (param externref) (result i32) (call $loadUint16    (call $indexOf (local.get 0))))
+    (func $getUint32        (param externref) (result i32) (call $loadUint32    (call $indexOf (local.get 0))))
+    (func $getBigUint64     (param externref) (result i64) (call $loadBigUint64 (call $indexOf (local.get 0))))
+    (func $getInt8          (param externref) (result i32) (call $loadInt8      (call $indexOf (local.get 0))))
+    (func $getInt16         (param externref) (result i32) (call $loadInt16     (call $indexOf (local.get 0))))
+    (func $getInt32         (param externref) (result i32) (call $loadInt32     (call $indexOf (local.get 0))))
+    (func $getBigInt64      (param externref) (result i64) (call $loadBigInt64  (call $indexOf (local.get 0))))
+    (func $getFloat32       (param externref) (result f32) (call $loadFloat32   (call $indexOf (local.get 0))))
+    (func $getFloat64       (param externref) (result f64) (call $loadFloat64   (call $indexOf (local.get 0))))
+
+    (func $randomUint8      (param i32) (result i32) (local i32) (call $storeUint8     (local.tee 1 (call $new_random_index)) (local.get 0)) (local.get 1))
+    (func $randomUint16     (param i32) (result i32) (local i32) (call $storeUint16    (local.tee 1 (call $new_random_index)) (local.get 0)) (local.get 1))
+    (func $randomUint32     (param i32) (result i32) (local i32) (call $storeUint32    (local.tee 1 (call $new_random_index)) (local.get 0)) (local.get 1))
+    (func $randomBigUint64  (param i64) (result i32) (local i32) (call $storeBigUint64 (local.tee 1 (call $new_random_index)) (local.get 0)) (local.get 1))
+    (func $randomInt8       (param i32) (result i32) (local i32) (call $storeInt8      (local.tee 1 (call $new_random_index)) (local.get 0)) (local.get 1))
+    (func $randomInt16      (param i32) (result i32) (local i32) (call $storeInt16     (local.tee 1 (call $new_random_index)) (local.get 0)) (local.get 1))
+    (func $randomInt32      (param i32) (result i32) (local i32) (call $storeInt32     (local.tee 1 (call $new_random_index)) (local.get 0)) (local.get 1))
+    (func $randomBigInt64   (param i64) (result i32) (local i32) (call $storeBigInt64  (local.tee 1 (call $new_random_index)) (local.get 0)) (local.get 1))
+    (func $randomFloat32    (param f32) (result i32) (local i32) (call $storeFloat32   (local.tee 1 (call $new_random_index)) (local.get 0)) (local.get 1))
+    (func $randomFloat64    (param f64) (result i32) (local i32) (call $storeFloat64   (local.tee 1 (call $new_random_index)) (local.get 0)) (local.get 1))
 
     (func $randomUUID
         (result v128)
-        (f64.store $base offset=0 (global.get $OFFSET_RANDOM_UUID) (call $self.Math.random<>f64))
-        (f64.store $base offset=8 (global.get $OFFSET_RANDOM_UUID) (call $self.Math.random<>f64))
-        (v128.load $base offset=0 (global.get $OFFSET_RANDOM_UUID))
+        (f64.store   $base offset=0 (global.get $OFFSET_RANDOM_UUID) (call $self.Math.random<>f64))
+        (f64.store   $base offset=8 (global.get $OFFSET_RANDOM_UUID) (call $self.Math.random<>f64))
+        (v128.load   $base offset=0 (global.get $OFFSET_RANDOM_UUID))
     )
 
     (func $get_vector_index
@@ -120,34 +164,37 @@
         (param $vector v128)
         (result i32)
         (local $index i32)
-        (call $set_vector_index (local.get $vector) (local.tee $index (call $next_index)))
+
+        (call $set_vector_index 
+            (local.get $vector) 
+            (local.tee $index (call $next_index))
+        )
+        
         (local.get $index)
     )
 
     (func $set_vector_index
-        (param $vector v128)
-        (param $index   i32)
+        (param $vector  v128)
+        (param $index    i32)
+        (local $offsets v128)
+        
+        (local.set $offsets 
+            (i32x4.mul 
+                (v128.const i32x4 1 2 4 8) 
+                (i32x4.splat (local.get $index))
+            )
+        )
     
-        (local $offset.i8x16 i32)
-        (local $offset.i16x8 i32)
-        (local $offset.i32x4 i32)
-        (local $offset.i64x2 i32)
-
-        (local.set $offset.i8x16 (local.get $index))
-        (local.set $offset.i16x8 (i32.mul (local.get $index) (i32.const 2)))
-        (local.set $offset.i32x4 (i32.mul (local.get $index) (i32.const 4)))
-        (local.set $offset.i64x2 (i32.mul (local.get $index) (i32.const 8)))
-
-        (i32.store8  $i8a (local.get $offset.i8x16) (i8x16.extract_lane_u 0 (local.get 0))) 
-        (i32.store8  $i8b (local.get $offset.i8x16) (i8x16.extract_lane_u 1 (local.get 0))) 
-        (i32.store16 $i16 (local.get $offset.i16x8) (i16x8.extract_lane_u 1 (local.get 0))) 
-        (i32.store   $i32 (local.get $offset.i32x4) (i32x4.extract_lane   1 (local.get 0))) 
-        (i64.store   $i64 (local.get $offset.i64x2) (i64x2.extract_lane   1 (local.get 0))) 
+        (i32.store8  $i8a (i32x4.extract_lane 0 (local.get $offsets)) (i8x16.extract_lane_u 0 (local.get $vector))) 
+        (i32.store8  $i8b (i32x4.extract_lane 0 (local.get $offsets)) (i8x16.extract_lane_u 1 (local.get $vector))) 
+        (i32.store16 $i16 (i32x4.extract_lane 1 (local.get $offsets)) (i16x8.extract_lane_u 1 (local.get $vector))) 
+        (i32.store   $i32 (i32x4.extract_lane 2 (local.get $offsets)) (i32x4.extract_lane   1 (local.get $vector))) 
+        (i64.store   $i64 (i32x4.extract_lane 3 (local.get $offsets)) (i64x2.extract_lane   1 (local.get $vector))) 
     )
 
     (func $count
-        (result i32)
-        (i32.sub (i32.load (global.get $OFFSET_UUID_COUNT)) (i32.const 1))
+        (result i32) 
+        (i32.load (global.get $OFFSET_UUID_COUNT))
     )
 
     (func $indexOf
@@ -200,6 +247,7 @@
     (func $join_array<ext>ext
         (param $array externref)
         (result externref)
+
         (reflect $apply<ext.ext.ext>ext 
             (ref.extern $Array:join) 
             (local.get $array) 
@@ -211,18 +259,34 @@
         (param $number i32)
         (param $padding i32)
         (result externref)
-        (call $pad_start<ext.i32>ext (reflect $apply<ext.i32.ext>ext (ref.extern $Number:toString) (local.get 0) (array $of<i32>ext (i32.const 16))) (local.get 1))
+
+        (call $pad_start<ext.i32>ext 
+            (reflect $apply<ext.i32.ext>ext 
+                (ref.extern $Number:toString) 
+                (local.get $number) 
+                (array $of<i32>ext (i32.const 16))
+            ) 
+            (local.get $padding)
+        )
     )
 
     (func $to_string<i32.i64>ext
         (param $bigint i64)
         (param $padding i32)
         (result externref)
-        (call $pad_start<ext.i32>ext (reflect $apply<ext.i64.ext>ext (ref.extern $BigInt:toString) (local.get 0) (array $of<i32>ext (i32.const 16))) (local.get 1))
+
+        (call $pad_start<ext.i32>ext 
+            (reflect $apply<ext.i64.ext>ext 
+                (ref.extern $BigInt:toString) 
+                (local.get $bigint) 
+                (array $of<i32>ext (i32.const 16))
+            ) 
+            (local.get $padding)
+        )
     )
 
     (func $main
-        (i32.store (global.get $OFFSET_UUID_COUNT) (i32.const 1))
+        (i32.store (global.get $OFFSET_UUID_COUNT) (i32.const 0))
         (i32.store (global.get $OFFSET_BLOCK_COUNT) (i32.const 1))
 
         (global.set $ARGUMENTS_REGEXP_CLEAR_STR (call $regexp_args (text "[^a-f0-9]") (string)))
@@ -238,6 +302,7 @@
         (param $expression externref)
         (param $replaceWith externref)
         (result externref)
+
         (array $of<ext.ext>ext 
             (reflect $construct<ext.ext>ext 
                 (ref.extern $RegExp) 
@@ -254,6 +319,7 @@
         (param $string externref)
         (param $expargs externref)
         (result externref)
+
         (reflect $apply<ext.ext.ext>ext 
             (ref.extern $String:replace) 
             (local.get $string) 
@@ -265,14 +331,26 @@
         (param $string externref)
         (param $expargs externref)
         (result i64)
-        (call $self.BigInt<ext>i64 (call $apply_regexp (local.get $string) (local.get $expargs)))
+
+        (call $self.BigInt<ext>i64 
+            (call $apply_regexp 
+                (local.get $string) 
+                (local.get $expargs)
+            )
+        )
     )
 
     (func $parse_number
         (param $string externref)
         (param $expargs externref)
         (result i32)
-        (call $self.Number<ext>i32 (call $apply_regexp (local.get $string) (local.get $expargs)))
+
+        (call $self.Number<ext>i32 
+            (call $apply_regexp 
+                (local.get $string) 
+                (local.get $expargs)
+            )
+        )
     )
 
     (func $parse_vector
@@ -310,6 +388,7 @@
         (local $i32.splat    v128)
         (local $i64.splat    v128)
 
+        (local $offsets v128)
         (local $offset.i8x16  i32)
         (local $offset.i16x8  i32)
         (local $offset.i32x4  i32)
@@ -317,6 +396,8 @@
         
         (local $blocks.index  i32)
         (local $blocks.count  i32)
+        
+        
 
         (local.set $i8a.value (i32.load8_u       $base offset=0 (global.get $OFFSET_SEARCH_VALUE)))
         (local.set $i8b.splat (v128.load8_splat  $base offset=1 (global.get $OFFSET_SEARCH_VALUE)))
@@ -330,10 +411,17 @@
         (loop $blocks
             (if (local.get $blocks.count)
                 (then
-                    (local.set $offset.i8x16 (i32.mul (local.get $blocks.index) (i32.const  16)))
-                    (local.set $offset.i16x8 (i32.mul (local.get $blocks.index) (i32.const  32)))
-                    (local.set $offset.i32x4 (i32.mul (local.get $blocks.index) (i32.const  64)))
-                    (local.set $offset.i64x2 (i32.mul (local.get $blocks.index) (i32.const 128)))
+                    (local.set $offsets 
+                        (i32x4.mul 
+                            (v128.const i32x4 16 32 64 128) 
+                            (i32x4.splat (local.get $blocks.index))
+                        )
+                    )
+
+                    (local.set $offset.i8x16 (i32x4.extract_lane 0 (local.get $offsets)))
+                    (local.set $offset.i16x8 (i32x4.extract_lane 1 (local.get $offsets)))
+                    (local.set $offset.i32x4 (i32x4.extract_lane 2 (local.get $offsets)))
+                    (local.set $offset.i64x2 (i32x4.extract_lane 3 (local.get $offsets)))
 
                     (local.set $blocks.index (i32.add (local.get $blocks.index) (i32.const 1))) 
                     (local.set $blocks.count (i32.sub (local.get $blocks.count) (i32.const 1)))
@@ -400,7 +488,7 @@
             )
         )
 
-        (i32.const 0)
+        (i32.const -1)
     )
 
     (start $main)
